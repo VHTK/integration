@@ -1,0 +1,90 @@
+server:
+  port: 8099
+  tomcat:
+    max-connections: 20000
+
+spring:
+  application:
+    name: application-order
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+  datasources:
+    gps_com:
+      url: jdbc:mysql://127.0.0.1:3306/gps_com?characterEncoding=UTF-8&serverTimezone=GMT&allowMultiQueries=true&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: root
+      initial-size: 5
+      max-active: 10
+      min-idle: 5
+      max-wait: 60000
+      time-between-eviction-runs-millis: 3000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x' FROM DUAL
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      filters: stat,wall,log4j2
+      pool-prepared-statements: false
+    db_201810:
+      url: jdbc:mysql://127.0.0.1:3306/db_201810?characterEncoding=UTF-8&serverTimezone=GMT&allowMultiQueries=true&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: root
+      initial-size: 5
+      max-active: 10
+      min-idle: 5
+      max-wait: 60000
+      time-between-eviction-runs-millis: 3000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x' FROM DUAL
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      filters: stat,wall,log4j2
+      pool-prepared-statements: false
+    db_201811:
+      url: jdbc:mysql://127.0.0.1:3306/db_201811?characterEncoding=UTF-8&serverTimezone=GMT&allowMultiQueries=true&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: root
+      initial-size: 5
+      max-active: 10
+      min-idle: 5
+      max-wait: 60000
+      time-between-eviction-runs-millis: 3000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x' FROM DUAL
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      filters: stat,wall,log4j2
+      pool-prepared-statements: false
+  rabbitmq:
+      addresses: 30.23.16.73:5672
+      username: dev
+      password: dev
+  cloud:
+      stream:
+        bindings:
+          testProduceCmdChannel:   #绑定通道
+            destination: testProduceCmd   #表示要使用的rabbit exchange名称定义
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+mybatis:
+  type-aliases-package: com.jinchi.order.domain.entity
+  mapperLocations: classpath*:mapper/*.xml
+  configuration:
+    cache-enabled: false
+pagehelper:
+  helper-dialect: mysql
+
+logging:
+  level:
+    com.example.edit.mapper: debug

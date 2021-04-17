@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: spring-security
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/spring_security?characterEncoding=UTF-8&serverTimezone=GMT&allowMultiQueries=true&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        minimum-idle: 5
+        auto-commit: true
+        idle-timeout: 10000
+        pool-name: DatebookHikariCP
+        max-lifetime: 1800000
+        connection-timeout: 30000
+        maximum-pool-size: 50
+        connection-test-query: select 1
+mybatis:
+    type-aliases-package: com.jinchi.spring.security.entity
+    mapperLocations: classpath*:mapper/*.xml
+pagehelper:
+    helper-dialect: mysql

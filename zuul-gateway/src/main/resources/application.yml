@@ -1,0 +1,82 @@
+spring:
+  application:
+    name: getway
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+server:
+  port: 8889
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8769/eureka/
+    registry-fetch-interval-seconds: 5
+    
+zuul:
+  routes:
+    oauth:
+      path: /oauth/**
+      service-id: spring-OAuth2
+    order:
+      path: /order/**
+      service-id: application-order
+  ratelimit:
+    enabled: true
+    repository: REDIS        # 使用redis存储
+    behind-proxy: true
+    key-prefix: gateway
+
+    default-policy:
+      limit: 100
+      quota: 1000
+      refresh-interval: 1    # 刷新时间窗口的时间，默认值 (秒)
+      type: URL
+    policies:
+      oauth:                  # 针对哪个服务限流
+        limit: 100           # 每个限流窗口对应的请求数量限制
+        quota: 1000          # 每个限流窗口对应的请求时间限制(所有请求总的耗时)，单位秒
+        refresh-interval: 3  # 刷新限流窗口的时间，默认1s，单位秒
+        type: URL
+      order:
+        limit: 100
+        quota: 1000
+        refresh-interval: 1
+        type: URL
+
+
+#默认为false，如果想用断路由，要打开这个设置
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      min-request-size: 2048
+      mime-types:
+        - text/xml
+        - application/xml
+        - application/json
+    response:
+      enabled: true
+
+#断路器线程池超时时间,这个值一定要比ribbon超时时间长，毫秒
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 12004000
+
+#ribbon超时时间
+ribbon:
+  ConnectTimeout: 2000
+  #请求处理的超时时间 下级服务响应最大时间,超出时间消费方（路由也是消费方）返回timeout
+  ReadTimeout: 6000000
+  ServerListRefreshInterval: 5000
+
+
+

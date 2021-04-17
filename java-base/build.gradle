@@ -1,0 +1,12 @@
+archivesBaseName = 'java-base'
+
+dependencies {
+    compile('commons-codec:commons-codec:1.10')
+    compile('org.apache.commons:commons-lang3:3.7')
+    compile('com.lmax:disruptor:3.4.2')
+    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
+    compile group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.21'
+    testCompile group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.21'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

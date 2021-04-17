@@ -1,0 +1,89 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: application-stock
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      master:
+        url: jdbc:mysql://127.0.0.1:3306/master?characterEncoding=UTF-8&serverTimezone=GMT&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: root
+        initial-size: 5
+        max-active: 10
+        min-idle: 5
+        max-wait: 60000
+        time-between-eviction-runs-millis: 3000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x' FROM DUAL
+        test-while-idle: true
+        test-on-borrow: true
+        test-on-return: false
+        filters: stat,wall,log4j2
+        pool-prepared-statements: false
+      slave:
+        url: jdbc:mysql://127.0.0.1:3306/slave?characterEncoding=UTF-8&serverTimezone=GMT&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: root
+        initial-size: 5
+        max-active: 10
+        min-idle: 5
+        max-wait: 60000
+        time-between-eviction-runs-millis: 3000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x' FROM DUAL
+        test-while-idle: true
+        test-on-borrow: true
+        test-on-return: false
+        filters: stat,wall,log4j2
+        pool-prepared-statements: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 1000
+    cluster:
+      nodes: 127.0.0.1:6379
+      max-redirects: 10
+    lettuce:
+      pool:
+        max-active: 100
+        max-wait: 3s
+        min-idle: 0
+        max-idle: 10
+  rabbitmq:
+      addresses: 30.23.16.73:5672
+      username: dev
+      password: dev
+  cloud:
+      stream:
+        bindings:
+          testProduceCmdChannel:   #定义通道，和bindings整合
+            destination: testProduceCmd   #表示要使用的rabbit exchange名称定义
+            group: web-edit
+            consumer:
+              concurrency: 4
+        rabbit:
+          bindings:
+            testProduceCmdChannel:    #绑定rabbit通道
+              consumer:
+                auto-bind-dlq: true
+                republish-to-dlq: true
+
+mybatis:
+  type-aliases-package: com.jinchi.stock.domain.entity
+  mapperLocations: classpath*:mapper/*.xml
+pagehelper:
+  helper-dialect: mysql
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8769/eureka/
+  instance:
+    prefer-ip-address: true
+
+
+

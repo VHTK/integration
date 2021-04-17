@@ -1,0 +1,5 @@
+archivesBaseName = 'application-user-client'
+
+dependencies {
+    compile project(':application-user-domain')
+}

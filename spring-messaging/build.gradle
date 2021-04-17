@@ -1,0 +1,6 @@
+archivesBaseName = 'spring-messaging'
+
+dependencies {
+    compile('org.springframework:spring-messaging')
+    compile project(':common-base')
+}

@@ -1,0 +1,12 @@
+archivesBaseName = 'gateway'
+
+dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-sleuth')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
+    compile('com.marcosbarbero.cloud:spring-cloud-zuul-ratelimit:2.0.4.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+
+    compile project(':common-base')
+}

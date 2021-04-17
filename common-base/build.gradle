@@ -1,0 +1,6 @@
+archivesBaseName = 'common-base'
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.apache.commons:commons-lang3:3.7')
+}

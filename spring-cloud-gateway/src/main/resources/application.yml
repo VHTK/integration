@@ -1,0 +1,30 @@
+server:
+  port: 8891
+spring:
+  application:
+    name: spring-cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: code
+          uri: lb://web-code
+          predicates:
+#           - name: CustomerPath
+#             args:
+#               Pattern: /code/**
+           - Path=/code/** # 路由规则
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8769/eureka/
+  instance:
+    prefer-ip-address: true
