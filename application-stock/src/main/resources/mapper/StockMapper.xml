@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jinchi.stock.mapper.StockMapper">
     <update id="updateByOptimistic" parameterType="com.jinchi.stock.domain.entity.Stock">
-        update stock
+        UPDATE stock
         <set>
             sale = sale + 1,
             version = version + 1,
@@ -10,4 +10,8 @@
         WHERE id = #{id,jdbcType=INTEGER}
         AND version = #{version,jdbcType=INTEGER}
     </update>
+
+    <select id="selectByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT s.count FROM stock s WHERE s.name = #{name}
+    </select>
 </mapper>
