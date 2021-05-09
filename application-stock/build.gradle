@@ -27,6 +27,13 @@ dependencies {
     compileOnly('org.springframework.boot:spring-boot-autoconfigure')
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 
+    // ehcache
+    compile('org.springframework.boot:spring-boot-starter-cache')
+    compile('net.sf.ehcache:ehcache:2.9.1')
+
+    // kafka
+    compile('org.apache.kafka:kafka_2.9.2:0.8.1')
+
     compile project(':spring-messaging')
     compile project(':common-base')
     compile project(':application-stock-domain')

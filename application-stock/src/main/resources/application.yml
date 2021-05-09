@@ -39,6 +39,9 @@ spring:
         test-on-return: false
         filters: stat,wall,log4j2
         pool-prepared-statements: false
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
   redis:
 #    host: 127.0.0.1
 #    port: 6379

@@ -1,17 +1,25 @@
 package com.jinchi.stock.service;
 
+import com.jinchi.stock.component.InventoryDto;
 import com.jinchi.stock.domain.entity.Stock;
-import org.springframework.stereotype.Service;
 
 /**
  * @Author: vhtk
  * @Description:
  * @Date: 2021/4/18
  */
-@Service
 public interface StockService {
 
     int updateStock(Stock stock);
 
+    int updateInventory(InventoryDto inventoryDto);
+
     Integer queryStock(String name);
+
+    void removeStockCache(InventoryDto inventoryDto);
+
+    void reloadCache(Integer stock);
+
+    Integer queryCacheStock(String name);
+
 }

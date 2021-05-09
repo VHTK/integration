@@ -1,3 +1,4 @@
+
 package com.jinchi.stock.config;
 
 /**
@@ -9,9 +10,12 @@ import com.jinchi.stock.context.MasterSlaveRoutingDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +28,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@AutoConfigureAfter(MybatisProperties.class)
+@MapperScan(basePackages = "com.jinchi.stock.mapper", sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
+
+    @Autowired
+    private MybatisProperties mybatisProperties;
 
     @Value("${spring.datasource.type}")
     private Class<? extends DataSource> dataSourceType;
@@ -42,7 +51,7 @@ public class DataSourceConfig {
         return DataSourceBuilder.create().type(dataSourceType).build();
     }
 
-    @Bean(name = "dataSource")
+    @Bean(name = "dynamicDataSource")
     public AbstractRoutingDataSource dataSource(@Autowired @Qualifier("masterDataSource") DataSource masterDataSource,
                                                 @Autowired @Qualifier("slaveDataSource") DataSource slaveDataSource) {
         MasterSlaveRoutingDataSource proxy = new MasterSlaveRoutingDataSource();
@@ -56,9 +65,11 @@ public class DataSourceConfig {
     }
 
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Autowired @Qualifier("dataSource") AbstractRoutingDataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(@Autowired @Qualifier("dynamicDataSource") AbstractRoutingDataSource dynamicDataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(dataSource);
+        bean.setDataSource(dynamicDataSource);
+        bean.setMapperLocations(mybatisProperties.resolveMapperLocations());
+        bean.setTypeAliasesPackage(mybatisProperties.getTypeAliasesPackage());
         return bean.getObject();
     }
 
@@ -67,3 +78,5 @@ public class DataSourceConfig {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
+
+
