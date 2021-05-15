@@ -21,11 +21,10 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-openfeign')
     compile('org.springframework.cloud:spring-cloud-starter-sleuth')
 
-    // spring-cloud-stream
-    compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
-    compileOnly('org.springframework:spring-web')
-    compileOnly('org.springframework.boot:spring-boot-autoconfigure')
-    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+    // spring-cloud-stream-kafka
+    compile('org.springframework.cloud:spring-cloud-stream')
+    compile('org.springframework.cloud:spring-cloud-stream-binder-kafka')
+    compile('org.springframework.kafka:spring-kafka')
 
     // sharding-jdbc
     compile('io.shardingjdbc:sharding-jdbc-core:2.0.3')

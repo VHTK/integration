@@ -1,7 +1,7 @@
 package com.jinchi.order.service;
 
 import com.jinchi.common.base.dto.EventTopic;
-import com.jinchi.order.stream.TestProduceCmdSource;
+import com.jinchi.order.stream.NotifyDeliverySource;
 import com.jinchi.spring.messaging.publish.MessagePublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,14 +10,15 @@ import org.springframework.stereotype.Service;
  * Created by ZHANGTAO269 on 2019-1-22.
  */
 @Service
-public class TestProduceCmdService {
+public class OrderService {
 
     @Autowired
-    private TestProduceCmdSource testProduceCmdSource;
+    private NotifyDeliverySource notifyDeliverySource;
 
-    public void produce() {
+    public void notifyStock(Integer productId) {
         EventTopic eventTopic = new EventTopic();
-        if (new MessagePublisher<EventTopic>().publish(testProduceCmdSource.testProduceCmd(), eventTopic)) {
+        eventTopic.setProductId(productId);
+        if (new MessagePublisher<EventTopic>().publish(notifyDeliverySource.notifyDelivery(), eventTopic)) {
             System.out.println("test produce msg success !!!");
         }
     }
