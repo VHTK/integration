@@ -1,6 +1,7 @@
 package com.jinchi.stock.controller;
 
 import com.jinchi.stock.domain.dto.ProductInfoDTO;
+import com.jinchi.stock.domain.dto.ShopInfoDTO;
 import com.jinchi.stock.service.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,16 @@ public class CacheController {
     @GetMapping("/cache")
     public String getCache(@RequestParam Integer id) {
         ProductInfoDTO dto = cacheService.getLocalCache(id);
-        return dto.getName();
+        return dto.getProductName();
+    }
+
+    @GetMapping("/getProductInfo")
+    public ProductInfoDTO getProductInfo(@RequestParam Integer productId) {
+        return cacheService.getProductInfo(productId);
+    }
+
+    @GetMapping("/getShopInfo")
+    public ShopInfoDTO getShopInfo(@RequestParam Integer shopId) {
+        return cacheService.getShopInfo(shopId);
     }
 }

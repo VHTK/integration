@@ -2,7 +2,7 @@ package com.jinchi.stock.domain.entity;
 
 import java.io.Serializable;
 
-public class Stock implements Serializable {
+public class  Stock implements Serializable {
     private static final long serialVersionUID = -8437012513227627973L;
 
     private Integer id;

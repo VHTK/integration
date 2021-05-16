@@ -12,6 +12,6 @@
     </update>
 
     <select id="selectByName" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT s.count FROM stock s WHERE s.name = #{name}
+        SELECT s.count FROM stock s WHERE s.productName = #{productName}
     </select>
 </mapper>
