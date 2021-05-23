@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @param <T>
  */
-public class MyContainer2<T> {
+public class ReentantLockProducerAndConsumer<T> {
     final private LinkedList<T> lists = new LinkedList<>();
     final private int MAX = 10; //最多10个元素
     private int count = 0;
@@ -54,7 +54,7 @@ public class MyContainer2<T> {
     }
 
     public static void main(String[] args) {
-        MyContainer2<String> c = new MyContainer2<>();
+        ReentantLockProducerAndConsumer<String> c = new ReentantLockProducerAndConsumer<>();
         //启动消费者线程
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {

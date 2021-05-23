@@ -3,7 +3,7 @@ package com.jinchi.java.base.juc;
 /**
  * 线程状态
  */
-public class T04_ThreadState {
+public class T02_ThreadState {
     static class MyThread extends Thread {
         @Override
         public void run() {

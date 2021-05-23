@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @param <T>
  */
-public class MyContainer1<T> {
+public class SynchronizedProducerAndConsumer<T> {
     final private LinkedList<T> lists = new LinkedList<>();
     final private int MAX = 10; //最多10个元素
     private int count = 0;
@@ -44,7 +44,7 @@ public class MyContainer1<T> {
     }
 
     public static void main(String[] args) {
-        MyContainer1<String> c = new MyContainer1<>();
+        SynchronizedProducerAndConsumer<String> c = new SynchronizedProducerAndConsumer<>();
         //启动消费者线程
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {

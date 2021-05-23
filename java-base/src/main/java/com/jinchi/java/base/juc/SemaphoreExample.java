@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CountExample {
+public class SemaphoreExample {
 
     // 请求总数
     public static int clientTotal = 100000;
