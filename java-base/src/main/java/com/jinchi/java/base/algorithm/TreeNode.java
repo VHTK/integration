@@ -1,6 +1,6 @@
 package com.jinchi.java.base.algorithm;
 
-class TreeNode {
+public class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;

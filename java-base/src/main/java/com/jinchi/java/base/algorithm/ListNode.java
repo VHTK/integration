@@ -1,6 +1,6 @@
 package com.jinchi.java.base.algorithm;
 
-class ListNode {
+public class ListNode {
     int val;
     ListNode next;
 
