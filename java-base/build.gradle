@@ -7,6 +7,7 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
     compile group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.21'
     testCompile group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.21'
+    compile('org.projectlombok:lombok:1.18.0')
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
